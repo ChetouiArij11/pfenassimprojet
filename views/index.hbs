@@ -1,0 +1,535 @@
+<script>
+$('.dashboard-nav__item').on 'click', (e) ->
+  e.preventDefault()
+  
+  $('.dashboard-nav_item').removeClass 'dashboard-nav_item--selected'
+  $(this).addClass 'dashboard-nav__item--selected'
+  
+  itemId = $(this).children().attr 'href'
+    
+  $('.dashboard-content__panel').hide()
+  $('.dashboard-content__panel[data-panel-id=' + itemId + ']').show()
+  
+  if itemId == 'my_trip'
+    $('.dashboard-preview').show()
+  else
+    $('.dashboard-preview').hide()
+  
+  console.log(itemId)
+  
+$('.dashboard-list__item').on 'click', (e) ->
+  e.preventDefault()
+  
+  $('.dashboard-list_item').removeClass 'dashboard-list_item--active'
+  $(this).addClass 'dashboard-list__item--active'
+  
+  itemId = $(this).attr 'data-item-id'
+  
+  $('.dashboard-preview__panel').hide()
+  $('.dashboard-preview__panel[data-panel-id=' + itemId + ']').show()
+  
+  console.log(itemId)
+</script>
+<style>
+    // Fonts
+$body-font: 'Open Sans';
+$header-font: $body-font;
+
+// Font Weights
+$light: 300;
+$regular: 400;
+$semibold: 600;
+$bold: 700;
+$ultra: 800;
+
+// Colors
+$white: #FFF;
+$black: #000;
+$text-primary: #5F6876;
+$text-secondary: #C0C3C9;
+
+// PX to REM Function
+$default-browser-font-size: 16;
+
+@function rem($pixels, $context: $default-browser-font-size) {
+  @if unitless($pixels) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if unitless($context) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}
+
+// Base
+$base-background: linear-gradient(45deg, #F4EBE5, #E3D4CA);
+$base-font-color: $text-secondary;
+$base-font-family: $body-font;
+$base-font-size: rem(12);
+$base-font-weight: $regular;
+$base-line-height: rem(14);
+
+// Dashboard
+$dashboard-background: $white;
+$dashboard-width: rem(1024);
+$dashboard-height: rem(680);
+$dashboard-border-color: #F2F2F2;
+$dashboard-border-radius: rem(7);
+$dashboard-box-shadow: rem(22) rem(32) rem(34) rgba($black, 0.06);
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: $base-background;
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: $base-font-weight;
+  line-height: $base-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Dashboard
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background: $dashboard-background;
+  width: $dashboard-width;
+  height: $dashboard-height;
+  border-radius: $dashboard-border-radius;
+  box-shadow: $dashboard-box-shadow;
+  overflow: hidden;
+  
+  // Dashboard Sidebar (Block)
+  &-sidebar {
+    flex-basis: rem(225);
+    width: rem(225);
+    min-width: rem(225);
+    border-right: rem(1) solid $dashboard-border-color;
+
+    // Brand (Element)
+    &__brand {
+      margin: 0 0 rem(23);
+      padding: rem(23) rem(26);
+    }
+  }
+    
+  // Dashboard Nav (Block)
+  &-nav {
+    
+    // Item (Element)
+    &__item {
+      background: 0;
+
+      // Link (Element)
+      a {
+        display: block;
+        padding: rem(21) rem(36);
+        color: inherit;
+        text-decoration: none;
+        
+        // Image (Element)
+        img {
+          margin: 0 rem(24) 0 0;
+        }
+      }
+      
+      // Selected (Modifier)
+      &--selected {
+        background: #F5F7F7;
+        color: $text-primary;
+      }
+    }
+  }
+  
+  // Dashboard Content (Block)
+  &-content {
+    width: 100%;
+    border-right: rem(1) solid $dashboard-border-color;
+    
+  // Dashboard Panel (Element)
+    &__panel {
+      display: none;
+      
+      &--active {
+        display: block;
+      }
+    }
+  }
+  
+  // Dashboard Panel (Block)
+  &-list {
+    
+    // Item (Element)
+    &__item {
+      padding: rem(33) rem(41);
+      border-bottom: rem(1) solid $dashboard-border-color;
+      cursor: pointer;
+      
+      h2 {
+        margin: 0 0 rem(27);
+        color: $text-primary;
+        letter-spacing: rem(2.4);
+      }
+      
+      span {
+        display: block;
+        margin: 0 0 rem(24);
+        font-size: rem(10);
+        letter-spacing: rem(2.18);
+      }
+      
+      // Active (Modifier)
+      &--active {
+        background: #F5F7F7;
+      }
+    }
+
+    // Avatar (Element)
+    &__avatar {
+      display: inline-block;
+      max-width: rem(31);
+      max-height: rem(31);
+      border-radius: 100%;
+      overflow: hidden;
+      margin: 0 rem(11) 0 0;
+    }
+  }
+  
+  // Dashboard Header (Block)
+  &-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: rem(59);
+    border-bottom: rem(1) solid $dashboard-border-color;
+    
+    &__search {
+      width: 100%;
+      height: 100%;
+      border-right: rem(1) solid $dashboard-border-color;
+      
+      input {
+        outline: none;
+        display: block;
+        width: 100%;
+        padding: 23px;
+        border: 0;
+        letter-spacing: rem(2);
+      }
+    }
+    
+    &__new {
+      min-width: rem(60);
+      padding: 23px;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+  }
+  
+  // Dashboard Preview (Block)
+  &-preview {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_background.jpg') no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    
+    // Panel (Element)
+    &__panel {
+      display: none;
+      
+      &--active {
+        display: block;
+      }
+    }
+    
+    // Header (Element)
+    &__header {
+      margin: 0 0 rem(152);
+      padding: rem(27) rem(29);
+      color: $white;
+
+      h2 {
+        font-size: rem(14);
+        line-height: rem(17);
+      }
+      
+      h3 {
+        font-size: rem(36);
+        line-height: rem(46);
+        
+        span {
+          font-size: rem(16);
+          line-height: rem(36);
+          vertical-align: top;
+        }
+      }
+    }
+    
+    // Content (Element)
+    &__content {
+      padding: 0 rem(44);
+      
+      section {
+        padding: rem(33) 0;
+        border-bottom: 1px solid $dashboard-border-color;
+        
+        &:last-child {
+          border: 0;
+        }
+      }
+      
+      h2 {
+        color: $text-primary;
+        letter-spacing: rem(2.2);
+        
+        span {
+          color: $text-secondary;
+          font-size: rem(10);
+        }
+      }
+      
+      label {
+        display: block;
+        margin: rem(17) 0 0 0;
+        color: $text-primary;
+        
+        &:first-child {
+          margin: rem(40) 0 0 0;
+        }
+        
+        input {
+          margin: 0 rem(23) 0 0;
+          
+          &:checked {
+            ~ span {
+              color: $text-secondary;
+              text-decoration: line-through;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.progress-bar {
+  position: relative;
+  background: #EDEBEA;
+  height: rem(5);
+  border-radius: rem(100);
+  margin: rem(46) 0 0 0;
+  
+  &__bar {
+    background: #8FC6C3;
+    height: 100%;
+    border-radius: rem(100);
+  }
+  
+  &__badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #A7DEDB;
+    border-radius: rem(100);
+    box-shadow: rem(2) rem(4) rem(12) rgba(#A7DEDB, 0.56);
+    padding: rem(6) rem(8);
+    color: $white;
+    font-size: rem(10);
+    line-height: rem(12);
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Demo
+.dashboard {
+  position: absolute;
+  left: 50%;
+  margin: 100px;
+  transform: translate(-50%, 0%);
+}
+</style>
+//- Nav Items
+- var navItems = { home: 'Home', my_trip: 'My Trip', discover_places: 'Discover Places', notifications: 'Notifications', settings: 'Settings' }
+
+//- Trips
+- var trips = { kulon_progo: 'Kulon Progo', bromo: 'Bromo' }
+
+//- Bromo Trip
+- var bromo = { title: 'Investors Meetup - Bromo', date: '15 May - 23 May 2016', temp: '21' }
+- var bromoTasks = ['Prepare the Sound Recorder', 'Book a resturant', 'Book 24 hotel rooms']
+
+//- Kulon Progo Trip
+- var kulon_progo = { title: 'Team holiday Trip to The Jewel of Java, Kulon Progo', date: '15 May - 23 May 2016', temp: '34' }
+- var kulon_progoTasks = ['Book tickets', 'Get passports ready', 'Book hotel rooms']
+
+
+// Dashboard (Parent Block)
+.dashboard
+
+  // Dashboard Sidebar (Block)
+  .dashboard-sidebar
+  
+    // Brand (Element)
+    .dashboard-sidebar__brand
+      img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_logo.svg')
+    
+    // Dashboard Nav (Block)
+    .dashboard-nav: ul
+      each name, val in navItems
+        if name == 'My Trip'
+          // Item:Selected (Element:Modifier)        
+          li.dashboard-nav_item.dashboard-nav_item--selected: a(href=val)
+            img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_' + val + '.svg')
+            =name
+
+        else
+          // Item (Element)
+          li.dashboard-nav__item: a(href=val)
+            img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_' + val + '.svg')
+            =name 
+
+  // Dashboard Content (Block)
+  .dashboard-content
+
+    // Dashboard Header (Block)
+    .dashboard-header
+    
+      // Search (Element)
+      .dashboard-header__search
+        input(type='search'
+              placeholder='Search...')
+      
+      // New (Element)
+      .dashboard-header__new
+        img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/planner_dashboard_new_plan.svg')
+        
+    each name, val in navItems
+      if name == 'My Trip'
+        // Dashboard Content Panel (Element)
+        .dashboard-content_panel.dashboard-content_panel--active(data-panel-id=val)
+
+          // Dashboard List (Block) 
+          .dashboard-list
+            each name, val in trips
+                  
+              if val == 'kulon_progo'
+                // Dasboard List Item (Element)
+                .dashboard-list__item(data-item-id=val)
+                  // Title (Element)
+                  h2=kulon_progo.title
+                  
+                  // Date (Element)
+                  span=kulon_progo.date
+                  
+                  - var totalAvatars = Math.floor((Math.random() * 7) + 1);
+                  - var n = 0
+
+                  while n < totalAvatars
+                    // Avatar (Element)
+                    .dashboard-list__avatar
+                      img(src='http://placehold.it/31/95BFBF/FFF'
+                          data-avatar-id=n++)
+            
+              else if val == 'bromo'
+                // Dasboard List Item (Element)
+                .dashboard-list_item.dashboard-list_item--active(data-item-id=val)
+                  // Title (Element)
+                  h2=bromo.title
+
+                  // Date (Element)
+                  span=bromo.date
+                  
+                  - var totalAvatars = Math.floor((Math.random() * 5) + 1);
+                  - var n = 0
+
+                  while n < totalAvatars
+                    // Avatar (Element)
+                    .dashboard-list__avatar
+                      img(src='http://placehold.it/31/95BFBF/FFF'
+                          data-avatar-id=n++)
+                  
+              else
+                // Dasboard List Item (Element)
+                .dashboard-list__item(data-item-id=val)
+                
+                  // Title (Element)
+                  h2 Null
+                  
+                  // Date (Element)
+                  span Null
+                  
+                  - var totalAvatars = Math.floor((Math.random() * 5) + 1);
+                  - var n = 0
+
+                  while n < totalAvatars
+                    // Avatar (Element)
+                    .dashboard-list__avatar
+                      img(src='http://placehold.it/31/95BFBF/FFF'
+                          data-avatar-id=n++)
+      
+      else
+        // Dashboard Content Panel (Element)
+        .dashboard-content__panel(data-panel-id=val)
+          p=name
+    
+  // Dashboard Preview (Block)  
+  .dashboard-preview
+    each name, val in trips
+    
+      // Panel (Element)
+      .dashboard-preview_panel(class=name == 'Bromo' ? 'dashboard-preview_panel--active' : ''
+                                data-panel-id=val)
+                                
+        // Header (Element)
+        .dashboard-preview__header
+          h2=name
+          h3
+            if name == 'Bromo'
+              =bromo.temp
+              span C
+            else if name == 'Kulon Progo'
+              = kulon_progo.temp
+              span C
+                                
+        // Content (Element)
+        .dashboard-preview__content
+          section
+            h2 My Tasks
+            
+            if name == 'Bromo'
+              each name in bromoTasks
+                label
+                  input(type='checkbox')
+                  span=name
+                  
+            else if name == 'Kulon Progo'
+              each name in kulon_progoTasks
+                label
+                  input(type='checkbox')
+                  span=name
+            else
+              p All task complete
+            
+          section
+            - var totalUnread = Math.floor((Math.random() * 100) + 1);
+            h2 Discussion 
+              span (#{totalUnread} unread)
+            
+          section
+            - var randomDay = Math.floor((Math.random() * 10) + 1);
+            h2 Progress 
+              span (Day #{randomDay} of 10)
+
+            - var percetange = Math.floor((Math.random() * 100) + 1);
+            
+            .progress-bar
+              .progress-bar__bar(style='width: #{percetange}%')
+              .progress-bar__badge(style='left: #{percetange}%')=percetange + '%'
