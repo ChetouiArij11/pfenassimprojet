@@ -20,12 +20,11 @@ app.get('/', function (req, res) {
     layout: 'main'
   });
 });
-app.get('/login', (req, res) => {
-  res.render("login",
-  {
-    layout: 'index'
-  });
-})
 
+app.get('/login', function (req, res) {
+  res.render("login", {
+    layout: 'main'
+  });
+});
 
 app.listen(3000);
