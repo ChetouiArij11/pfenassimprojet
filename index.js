@@ -26,5 +26,9 @@ app.get('/login', function (req, res) {
     layout: 'main'
   });
 });
-
+app.get('/footer', function (req, res) {
+  res.render("footer", {
+    layout: 'main'
+  });
+});
 app.listen(3000);
