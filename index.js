@@ -60,12 +60,12 @@ app.get('/footer', function (req, res) {
     layout: 'main'
   });
 });
-app.get('/autrecomm', function (req, res) {
+app.get('/autrecommande', function (req, res) {
   res.render("autrecomm", {
     layout: 'main'
   });
 });
-app.get('/mescomm', function (req, res) {
+app.get('/mescommande', function (req, res) {
   res.render("mescomm", {
     layout: 'main'
   });

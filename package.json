@@ -1,7 +1,6 @@
 {
   "name": "pfenassimprojet",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,9 +17,12 @@
   "homepage": "https://github.com/ChetouiArij11/pfenassimprojet#readme",
   "dependencies": {
     "express": "^4.17.2",
-    "express-handlebars": "^6.0.2"
+    "express-handlebars": "^6.0.2",
+    "jshint": "^2.13.4"
   },
   "devDependencies": {
     "tailwindcss": "^3.0.23"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }
