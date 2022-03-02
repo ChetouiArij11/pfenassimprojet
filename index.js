@@ -70,13 +70,17 @@ app.get('/footer', function (req, res) {
     layout: 'main'
   });
 });
+<<<<<<< HEAD
 
 app.get('/autrecomm', function (req, res) {
+=======
+app.get('/autrecommande', function (req, res) {
+>>>>>>> 2fd70087e0fa54b74d6106a9e6be204f72982c5d
   res.render("autrecomm", {
     layout: 'main'
   });
 });
-app.get('/mescomm', function (req, res) {
+app.get('/mescommande', function (req, res) {
   res.render("mescomm", {
     layout: 'main'
   });
