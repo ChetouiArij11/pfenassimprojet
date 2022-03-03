@@ -18,17 +18,14 @@
   "dependencies": {
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
-    "jshint": "^2.13.4"
+    "jshint": "^2.13.4",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.7",
     "tailwindcss": "^3.0.23",
     "vite": "^2.8.5"
-=======
-    "tailwindcss": "^3.0.23"
->>>>>>> 2fd70087e0fa54b74d6106a9e6be204f72982c5d
   },
   "keywords": [],
   "description": ""
