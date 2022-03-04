@@ -1,12 +1,25 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
-
 const app = express();
+const path = require('path');
+
+var mysql = require('mysql');
+
+var pool = mysql.createConnection({
+  connectionLimit: 10,
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "nassim",
+  port: '3200'
+});
+
+pool.connect(function (err) {
+  if (err) throw err;
+
+});
+
 app.use(express.static('public'));
-
-
-
-
 
 const hbs = handlebars.create({
   layoutsDir: __dirname + '/views/layouts',
@@ -17,9 +30,6 @@ const hbs = handlebars.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', './views');
-
-
-
 // Routes
 
 app.get('/', function (req, res) {
