@@ -52,7 +52,7 @@ app.get('/profile', function (req, res) {
 });
 
 app.get('/add', function (req, res) {
-  res.render("add", {
+  res.render("add_article", {
     layout: 'main'
   });
 });
